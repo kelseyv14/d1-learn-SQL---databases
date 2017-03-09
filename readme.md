@@ -63,17 +63,17 @@ I could add all of those up and get the sum but I feel like there is a function 
 count (price)
 15
 
+edit: select sum(price) from items where category like '%tools%';
+46477
+
 //7 How many total items did we sell?
-sqlite> select count (distinct category) from items;
-count (distinct category)
-78
+sqlite> select sum(quantity) from orders;
+2125
 
 //8 How much was spent on books?
-sqlite> select count (price) from items where category like '%books%';
-count (price)
-10
-
-same idea...felt close here, but I know there is a better function to use
+sqlite> select items.category from items where category like '%Books%';
+select sum((items.price * orders.quantity) / 100) as total from orders join items on items.id = orders.item_id where items.category like '%Books%';
+10799
 
 //9 Simulate buying an item by inserting a User for yourself and an Order for that User.
 sqlite> insert into users (id, first_name, last_name, email) values (4444, 'kelsey', 'vaught','kelsey.vaught92@gmail.com');
